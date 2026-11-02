@@ -147,17 +147,17 @@ export const ExecutiveSummaryPage: React.FC<ExecutiveSummaryPageProps> = ({
         {/* 1. Sales Top KPI */}
         <div
           onClick={() => onNavigate('sales')}
-          className="group cursor-pointer rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs hover:border-emerald-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 transition-all"
+          className="group cursor-pointer rounded-xl sm:rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-5 shadow-xs hover:border-emerald-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 transition-all min-w-0"
         >
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+          <div className="flex items-center justify-between mb-2.5 sm:mb-3">
+            <span className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider truncate">
               1. Sales Performance
             </span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400">
+            <div className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400">
               <TrendingUp className="h-4 w-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-slate-900 dark:text-white">
+          <div className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white truncate">
             {formatCurrency(summaryMetrics.salesRev, true)}
           </div>
           <div className="mt-1 flex items-center justify-between text-xs">

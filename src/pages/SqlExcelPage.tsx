@@ -119,10 +119,28 @@ export const SqlExcelPage: React.FC = () => {
           </div>
         </div>
 
+        {/* Mobile Query Dropdown Selector */}
+        <div className="block lg:hidden">
+          <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1.5">
+            Active SQL Query ({filteredQueries.length} available)
+          </label>
+          <select
+            value={activeQueryId}
+            onChange={(e) => setActiveQueryId(e.target.value)}
+            className="w-full rounded-xl border border-indigo-200 bg-white p-3 text-xs font-semibold text-slate-800 shadow-xs focus:border-indigo-500 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+          >
+            {filteredQueries.map((q) => (
+              <option key={q.id} value={q.id}>
+                [{q.category}] {q.title}
+              </option>
+            ))}
+          </select>
+        </div>
+
         {/* Query Selector List & Active Query Execution Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Query Selector Sidebar (4 cols) */}
-          <div className="lg:col-span-4 space-y-2">
+          {/* Query Selector Sidebar (4 cols - Desktop Only) */}
+          <div className="hidden lg:block lg:col-span-4 space-y-2">
             <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
               Select SQL Query to Execute
             </span>
@@ -160,9 +178,9 @@ export const SqlExcelPage: React.FC = () => {
           {/* Active Query Display & Live Execution Table (8 cols) */}
           <div className="lg:col-span-8 space-y-4">
             {/* Query Header & Explanation */}
-            <div className="rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+            <div className="rounded-xl sm:rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 dark:border-slate-800">
-                <div>
+                <div className="min-w-0 flex-1">
                   <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                     {activeQuery.title}
                   </h3>
@@ -294,9 +312,9 @@ export const SqlExcelPage: React.FC = () => {
         </div>
 
         {/* Active Formula Details Card */}
-        <div className="rounded-3xl border border-slate-200/90 bg-white p-6 shadow-xs dark:border-slate-800 dark:bg-slate-900">
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-4 dark:border-slate-800">
-            <div>
+        <div className="rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-white p-4 sm:p-6 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4 dark:border-slate-800">
+            <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
                 <span className="rounded bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
                   {activeFormula.category}
@@ -310,8 +328,8 @@ export const SqlExcelPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="rounded-lg bg-slate-50 px-3 py-1 font-mono text-xs text-emerald-700 dark:bg-slate-800 dark:text-emerald-400 border border-slate-200 dark:border-slate-700">
-              {activeFormula.syntax}
+            <div className="rounded-lg bg-slate-50 px-3 py-1.5 font-mono text-[11px] sm:text-xs text-emerald-700 dark:bg-slate-800 dark:text-emerald-400 border border-slate-200 dark:border-slate-700 max-w-full overflow-x-auto">
+              <code>{activeFormula.syntax}</code>
             </div>
           </div>
 

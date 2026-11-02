@@ -46,7 +46,7 @@ const pmoCase: PmoDetails = {
   method:
     'Created a unified marketing attribution data model in SQL with first-touch and last-touch attribution weighting, automated weekly CSV imports via Power Query, and built a full-funnel conversion dashboard in Power BI.',
   outcome:
-    'Demonstrated that Paid Search and Referral delivered 4.2x higher ROAS than Display, enabling the leadership team to reallocate ₹35 Lakhs of marketing budget with a net 28% increase in closed conversions.',
+    'Demonstrated that Paid Search and Referral delivered 4.2x higher ROAS than Display, enabling the leadership team to reallocate $420,000 of marketing budget with a net 28% increase in closed conversions.',
   toolsUsed: ['Excel', 'Power Query', 'SQL Window Functions', 'Power BI Marketing', 'Google Ads API'],
 };
 
@@ -437,7 +437,7 @@ export const MarketingDashboard: React.FC = () => {
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-slate-800" />
               <XAxis dataKey="month" tick={{ fontSize: 10 }} stroke="#94a3b8" />
-              <YAxis tickFormatter={(v) => `₹${(v / 100000).toFixed(0)}L`} tick={{ fontSize: 10 }} stroke="#94a3b8" />
+              <YAxis tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} tick={{ fontSize: 10 }} stroke="#94a3b8" />
               <Tooltip
                 formatter={(val: any, name: any) => [formatCurrency(Number(val)), name === 'revenue' ? 'Revenue' : 'Ad Spend']}
                 contentStyle={{ borderRadius: '8px', fontSize: '12px' }}

@@ -22,12 +22,12 @@ export const ChartCard: React.FC<ChartCardProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs transition-colors dark:border-slate-800 dark:bg-slate-900 ${className}`}
+      className={`flex flex-col rounded-xl sm:rounded-2xl border border-slate-200/90 bg-white p-3.5 sm:p-5 shadow-xs transition-colors dark:border-slate-800 dark:bg-slate-900 min-w-0 ${className}`}
     >
-      <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
-        <div>
-          <div className="flex items-center gap-2">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+      <div className="mb-3 sm:mb-4 flex flex-wrap items-start justify-between gap-2">
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
               {title}
             </h3>
             {activeFilterBadge && (

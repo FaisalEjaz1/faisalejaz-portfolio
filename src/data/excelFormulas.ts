@@ -26,13 +26,13 @@ export const excelShowcaseFormulas: ExcelShowcaseFormula[] = [
     exampleData: {
       headers: ['Order ID (A)', 'Date (B)', 'Region (C)', 'Sales Rep (D)', 'Revenue (E)'],
       rows: [
-        ['SO-2025-1040', '2025-04-12', 'West', 'Priya Sharma', '₹1,85,000'],
-        ['SO-2025-1041', '2025-04-13', 'North', 'Deepak Verma', '₹92,400'],
-        ['SO-2025-1042', '2025-04-14', 'South', 'Karthik Raman', '₹3,45,000'],
-        ['SO-2025-1043', '2025-04-14', 'West', 'Amit Patel', '₹1,12,000'],
+        ['SO-2025-1040', '2025-04-12', 'West', 'Priya Sharma', '$185,000'],
+        ['SO-2025-1041', '2025-04-13', 'North', 'Deepak Verma', '$92,400'],
+        ['SO-2025-1042', '2025-04-14', 'South', 'Karthik Raman', '$345,000'],
+        ['SO-2025-1043', '2025-04-14', 'West', 'Amit Patel', '$112,000'],
       ],
     },
-    sampleCalculationNote: 'Looking up "SO-2025-1042" in Col A directly retrieves "₹3,45,000" from Col E with 0 risk of column shift errors.',
+    sampleCalculationNote: 'Looking up "SO-2025-1042" in Col A directly retrieves "$345,000" from Col E with 0 risk of column shift errors.',
     proTip: 'Use nested XLOOKUP for a 2-way matrix lookup: =XLOOKUP(Quarter, HeaderRow, XLOOKUP(Dept, DeptCol, DataMatrix)).',
   },
   {
@@ -46,13 +46,13 @@ export const excelShowcaseFormulas: ExcelShowcaseFormula[] = [
     exampleData: {
       headers: ['Order (A)', 'Date (B)', 'Region (C)', 'Category (D)', 'Units (E)', 'Revenue (F)'],
       rows: [
-        ['SO-901', '2025-04-02', 'West', 'Electronics', 14, '₹3,99,000'],
-        ['SO-902', '2025-04-05', 'North', 'Office Supplies', 8, '₹52,000'],
-        ['SO-903', '2025-04-09', 'West', 'Electronics', 22, '₹6,27,000'],
-        ['SO-904', '2025-04-11', 'West', 'Hardware', 6, '₹1,74,000'],
+        ['SO-901', '2025-04-02', 'West', 'Electronics', 14, '$399,000'],
+        ['SO-902', '2025-04-05', 'North', 'Office Supplies', 8, '$52,000'],
+        ['SO-903', '2025-04-09', 'West', 'Electronics', 22, '$627,000'],
+        ['SO-904', '2025-04-11', 'West', 'Hardware', 6, '$174,000'],
       ],
     },
-    sampleCalculationNote: 'Filtered sum of West + Electronics rows: ₹3,99,000 + ₹6,27,000 = ₹10,26,000 total revenue.',
+    sampleCalculationNote: 'Filtered sum of West + Electronics rows: $399,000 + $627,000 = $1,026,000 total revenue.',
     proTip: 'Reference external cell controls (e.g. `">=" & $K$1`) so executives can change threshold dates dynamically.',
   },
   {
@@ -66,12 +66,12 @@ export const excelShowcaseFormulas: ExcelShowcaseFormula[] = [
     exampleData: {
       headers: ['Department (A)', 'Jan 2025 (B)', 'Feb 2025 (C)', 'Mar 2025 (D)', 'Apr 2025 (E)'],
       rows: [
-        ['Marketing', '₹8,50,000', '₹8,90,000', '₹9,20,000', '₹9,45,000'],
-        ['Engineering', '₹22,00,000', '₹22,50,000', '₹23,10,000', '₹24,80,000'],
-        ['Sales', '₹14,20,000', '₹14,00,000', '₹15,60,000', '₹15,90,000'],
+        ['Marketing', '$85,000', '$89,000', '$92,000', '$94,500'],
+        ['Engineering', '$220,000', '$225,000', '$231,000', '$248,000'],
+        ['Sales', '$142,000', '$140,000', '$156,000', '$159,000'],
       ],
     },
-    sampleCalculationNote: 'MATCH identifies row 2 (Engineering) and column 4 (Apr 2025), extracting the intersection: ₹24,80,000.',
+    sampleCalculationNote: 'MATCH identifies row 2 (Engineering) and column 4 (Apr 2025), extracting the intersection: $248,000.',
     proTip: 'Use INDEX/MATCH when designing legacy enterprise workbooks where end users might still run Excel 2016 or earlier without XLOOKUP support.',
   },
   {
@@ -85,12 +85,12 @@ export const excelShowcaseFormulas: ExcelShowcaseFormula[] = [
     exampleData: {
       headers: ['Pivot Field', 'Q1 FY25', 'Q2 FY25', 'Q3 FY25', 'Total FY25'],
       rows: [
-        ['West Region', '₹34.5 L', '₹38.2 L', '₹42.1 L', '₹114.8 L'],
-        ['North Region', '₹28.1 L', '₹29.4 L', '₹31.0 L', '₹88.5 L'],
-        ['South Region', '₹31.4 L', '₹33.0 L', '₹35.8 L', '₹100.2 L'],
+        ['West Region', '$345k', '$382k', '$421k', '$1.15M'],
+        ['North Region', '$281k', '$294k', '$310k', '$885k'],
+        ['South Region', '$314k', '$330k', '$358k', '$1.00M'],
       ],
     },
-    sampleCalculationNote: 'Directly retrieves West Region 2025 aggregate total ₹114.8 L even if new regional rows or quarterly columns are added.',
+    sampleCalculationNote: 'Directly retrieves West Region 2025 aggregate total $1.15M even if new regional rows or quarterly columns are added.',
     proTip: 'Pair GETPIVOTDATA with dynamic cell references for field arguments to make report cards completely interactive.',
   },
   {

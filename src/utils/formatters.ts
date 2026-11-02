@@ -1,43 +1,42 @@
 /**
- * Formatting utilities for MIS & Analytics reporting
+ * Formatting utilities for MIS & Analytics reporting (US Dollar standard)
  */
 
-// Format currency in Indian Rupees (₹)
+// Format currency in US Dollars ($)
 export function formatCurrency(
   amount: number,
   compact = false,
   decimals = 1
 ): string {
-  if (isNaN(amount) || amount === null || amount === undefined) return '₹0';
+  if (isNaN(amount) || amount === null || amount === undefined) return '$0';
   
   if (compact) {
     const abs = Math.abs(amount);
     const sign = amount < 0 ? '-' : '';
-    // Indian Lakhs & Crores compact standard or Millions
-    if (abs >= 10000000) {
-      return `${sign}₹${(abs / 10000000).toFixed(decimals)} Cr`;
+    if (abs >= 1000000000) {
+      return `${sign}$${(abs / 1000000000).toFixed(decimals)}B`;
     }
-    if (abs >= 100000) {
-      return `${sign}₹${(abs / 100000).toFixed(decimals)} L`;
+    if (abs >= 1000000) {
+      return `${sign}$${(abs / 1000000).toFixed(decimals)}M`;
     }
     if (abs >= 1000) {
-      return `${sign}₹${(abs / 1000).toFixed(decimals)}k`;
+      return `${sign}$${(abs / 1000).toFixed(decimals)}k`;
     }
-    return `${sign}₹${abs.toFixed(0)}`;
+    return `${sign}$${abs.toFixed(0)}`;
   }
 
-  // Standard Indian comma separator format (e.g. 1,23,456.78)
+  // Standard international comma separator format (e.g. $1,234,567)
   const isNegative = amount < 0;
   const absAmount = Math.abs(amount);
-  const formatted = new Intl.NumberFormat('en-IN', {
+  const formatted = new Intl.NumberFormat('en-US', {
     maximumFractionDigits: decimals > 0 ? decimals : 0,
     minimumFractionDigits: 0,
   }).format(absAmount);
 
-  return `${isNegative ? '-' : ''}₹${formatted}`;
+  return `${isNegative ? '-' : ''}$${formatted}`;
 }
 
-// Format numbers with thousands separators
+// Format numbers with standard thousands separators
 export function formatNumber(
   num: number,
   compact = false,
@@ -57,7 +56,7 @@ export function formatNumber(
     return `${sign}${abs.toFixed(0)}`;
   }
 
-  return new Intl.NumberFormat('en-IN', {
+  return new Intl.NumberFormat('en-US', {
     maximumFractionDigits: decimals > 0 ? decimals : 0,
   }).format(num);
 }

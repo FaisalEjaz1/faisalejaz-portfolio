@@ -42,7 +42,7 @@ const pmoCase: PmoDetails = {
   method:
     'Consolidated warehouse WMS databases into SQL via Power Query, engineered dynamic reorder point models accounting for lead-time variance, and built an automated stock replenishment alert system in Power BI.',
   outcome:
-    'Prevented critical stockouts across 42 high-demand SKUs, elevated on-time delivery from 81% to 89.2%, and reduced expedited freight costs by ₹19.5 Lakhs annually.',
+    'Prevented critical stockouts across 42 high-demand SKUs, elevated on-time delivery from 81% to 89.2%, and reduced expedited freight costs by $240,000 annually.',
   toolsUsed: ['Excel', 'Power Query', 'SQL Stored Procedures', 'Power BI Logistics', 'WMS Data Feeds'],
 };
 

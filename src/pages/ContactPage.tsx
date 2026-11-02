@@ -13,6 +13,8 @@ import {
   GraduationCap,
   Award,
   Sparkles,
+  MessageCircle,
+  ExternalLink,
 } from 'lucide-react';
 import { useProfile } from '../context/ProfileContext';
 
@@ -39,12 +41,15 @@ export const ContactPage: React.FC = () => {
   const handleDownloadResume = () => {
     setIsResumeDownloading(true);
     setTimeout(() => {
-      // Create a clean textual / markdown resume download blob
+      // Clean executive resume summary
       const resumeContent = `=====================================================
 ${profile.name.toUpperCase()}
 ${profile.title}
-Email: ${profile.email} | Phone: ${profile.phone}
-LinkedIn: https://${profile.linkedin} | Location: ${profile.location}
+Location: ${profile.location}
+Email: ${profile.email}
+Phone (Calls): ${profile.phone}
+WhatsApp: ${profile.whatsapp || '+923086728781'}
+LinkedIn: https://${profile.linkedin.replace(/^https?:\/\//, '')}
 =====================================================
 
 EXECUTIVE SUMMARY
@@ -53,21 +58,21 @@ ${profile.bio}
 CORE TECHNICAL COMPETENCIES
 - Spreadsheets: Advanced MS Excel (Pivot Tables, XLOOKUP, INDEX/MATCH, Power Query, VBA/Macros)
 - Relational Databases: SQL (PostgreSQL, MySQL, T-SQL, CTEs, Window Functions, DENSE_RANK)
-- Business Intelligence: Power BI (DAX Measures, Data Modeling, Star Schema, Gateway Refreshes), Tableau Basics
-- Data Transformation: Power Query ETL, Data Cleansing, Imputation & Deduplication
-- Reporting Cadence: Daily, Weekly & Monthly Executive MIS Cockpits, Financial Reconciliations
+- Business Intelligence: Power BI (DAX Measures, Data Modeling, Star Schema, Scheduled Gateway Refreshes), Tableau
+- Data Transformation: Power Query ETL, Automated Data Cleansing, Imputation & Deduplication
+- Reporting Cadence: Daily, Weekly & Monthly Executive MIS Cockpits, Financial Reconciliations, Variance Analysis
 
 PROFESSIONAL EXPERIENCE (SUMMARY)
 - MIS Executive / Reporting Analyst (2022 - Present)
   * Automated 14 recurring daily/weekly operational reporting packs, slashing manual latency by 85%.
-  * Modeled financial budget-vs-actual variance ledgers across ₹18 Cr in operating capital.
+  * Modeled financial budget-vs-actual variance ledgers across $18M in corporate operating capital.
   * Created unified multi-channel customer support SLA & CSAT telemetry tracking.
-  * Designed end-to-end sales performance dashboards supporting regional leadership reviews.
+  * Designed end-to-end sales performance dashboards supporting regional leadership reviews in Riyadh and international markets.
 
 EDUCATION & CERTIFICATIONS
 - Bachelor of Science in Information Technology / Computer Applications
 - Advanced Excel & Power Query Data Modeling Certification
-- SQL for Business Analytics & Data Warehousing
+- SQL for Business Analytics & Relational Warehousing
 =====================================================`;
 
       const blob = new Blob([resumeContent], { type: 'text/plain;charset=utf-8' });
@@ -83,6 +88,10 @@ EDUCATION & CERTIFICATIONS
     }, 600);
   };
 
+  const cleanPhone = profile.phone.replace(/[^0-9+]/g, '');
+  const cleanWhatsapp = (profile.whatsapp || '+923086728781').replace(/[^0-9]/g, '');
+  const cleanLinkedin = profile.linkedin.startsWith('http') ? profile.linkedin : `https://${profile.linkedin}`;
+
   return (
     <div className="space-y-10">
       {/* Header */}
@@ -94,12 +103,12 @@ EDUCATION & CERTIFICATIONS
           </h1>
         </div>
         <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 max-w-2xl">
-          Get in touch with {profile.name} regarding MIS Executive, Reporting Analyst, and Business Intelligence opportunities.
+          Get in touch with {profile.name} regarding MIS Executive, Reporting Analyst, and Business Intelligence opportunities in Riyadh and globally.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Left Column: Profile Card & Resume Preview (5 cols) */}
+        {/* Left Column: Profile Card & Direct Channels (5 cols) */}
         <div className="lg:col-span-5 space-y-6">
           {/* Candidate Card */}
           <div className="rounded-3xl border border-slate-200/90 bg-white p-6 shadow-xs dark:border-slate-800 dark:bg-slate-900 transition-colors">
@@ -111,6 +120,10 @@ EDUCATION & CERTIFICATIONS
                 <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5">
                   {profile.title}
                 </p>
+                <div className="mt-1 flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                  <MapPin className="h-3.5 w-3.5 text-rose-500" />
+                  <span>{profile.location}</span>
+                </div>
               </div>
 
               <button
@@ -127,52 +140,93 @@ EDUCATION & CERTIFICATIONS
               {profile.bio}
             </p>
 
+            {/* Direct Quick Action Buttons */}
+            <div className="mt-5 grid grid-cols-2 gap-2.5">
+              <a
+                href={`https://wa.me/${cleanWhatsapp}?text=Hi%20Faisal,%20I%20reviewed%20your%20MIS%20Reporting%20Analyst%20portfolio...`}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center gap-1.5 rounded-xl bg-emerald-600 py-2.5 px-3 text-xs font-bold text-white shadow-xs hover:bg-emerald-500 transition-colors"
+              >
+                <MessageCircle className="h-4 w-4" />
+                <span>WhatsApp</span>
+              </a>
+
+              <a
+                href={`tel:${cleanPhone}`}
+                className="flex items-center justify-center gap-1.5 rounded-xl bg-indigo-600 py-2.5 px-3 text-xs font-bold text-white shadow-xs hover:bg-indigo-500 transition-colors"
+              >
+                <Phone className="h-4 w-4" />
+                <span>Call Direct</span>
+              </a>
+            </div>
+
+            {/* Detailed Channels List */}
             <div className="mt-6 space-y-3 border-t border-slate-100 pt-5 dark:border-slate-800 text-xs">
               <a
                 href={`mailto:${profile.email}`}
-                className="flex items-center gap-3 text-slate-700 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400"
+                className="flex items-center gap-3 text-slate-700 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 group min-w-0"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-400">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-400">
                   <Mail className="h-4 w-4" />
                 </div>
-                <div>
-                  <span className="block text-[10px] text-slate-400 uppercase font-bold">Email</span>
-                  <span className="font-semibold">{profile.email}</span>
+                <div className="min-w-0 flex-1">
+                  <span className="block text-[10px] text-slate-400 uppercase font-bold">Email Address</span>
+                  <span className="font-semibold group-hover:underline truncate block">{profile.email}</span>
                 </div>
               </a>
-
-              <div className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400">
-                  <Phone className="h-4 w-4" />
-                </div>
-                <div>
-                  <span className="block text-[10px] text-slate-400 uppercase font-bold">Phone</span>
-                  <span className="font-semibold">{profile.phone}</span>
-                </div>
-              </div>
 
               <a
-                href={`https://${profile.linkedin}`}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-3 text-slate-700 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400"
+                href={`tel:${cleanPhone}`}
+                className="flex items-center gap-3 text-slate-700 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 group min-w-0"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-50 text-sky-600 dark:bg-sky-950 dark:text-sky-400">
-                  <Linkedin className="h-4 w-4" />
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-400">
+                  <Phone className="h-4 w-4" />
                 </div>
-                <div>
-                  <span className="block text-[10px] text-slate-400 uppercase font-bold">LinkedIn Profile</span>
-                  <span className="font-semibold">{profile.linkedin}</span>
+                <div className="min-w-0 flex-1">
+                  <span className="block text-[10px] text-slate-400 uppercase font-bold">Phone Number (Riyadh / Saudi Arabia)</span>
+                  <span className="font-semibold group-hover:underline truncate block">{profile.phone}</span>
                 </div>
               </a>
 
-              <div className="flex items-center gap-3 text-slate-700 dark:text-slate-300">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-50 text-purple-600 dark:bg-purple-950 dark:text-purple-400">
+              <a
+                href={`https://wa.me/${cleanWhatsapp}?text=Hi%20Faisal,%20I%20reviewed%20your%20MIS%20Reporting%20Analyst%20portfolio...`}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-3 text-slate-700 hover:text-emerald-600 dark:text-slate-300 dark:hover:text-emerald-400 group min-w-0"
+              >
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400">
+                  <MessageCircle className="h-4 w-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <span className="block text-[10px] text-slate-400 uppercase font-bold">WhatsApp Direct</span>
+                  <span className="font-semibold group-hover:underline truncate block">{profile.whatsapp || '+923086728781'}</span>
+                </div>
+              </a>
+
+              <a
+                href={cleanLinkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-3 text-slate-700 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 group min-w-0"
+              >
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-sky-50 text-sky-600 dark:bg-sky-950 dark:text-sky-400">
+                  <Linkedin className="h-4 w-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <span className="block text-[10px] text-slate-400 uppercase font-bold">LinkedIn Profile</span>
+                  <span className="font-semibold truncate block group-hover:underline">{profile.linkedin}</span>
+                </div>
+                <ExternalLink className="h-3.5 w-3.5 text-slate-400 shrink-0" />
+              </a>
+
+              <div className="flex items-center gap-3 text-slate-700 dark:text-slate-300 min-w-0">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-rose-50 text-rose-600 dark:bg-rose-950 dark:text-rose-400">
                   <MapPin className="h-4 w-4" />
                 </div>
-                <div>
-                  <span className="block text-[10px] text-slate-400 uppercase font-bold">Location</span>
-                  <span className="font-semibold">{profile.location}</span>
+                <div className="min-w-0 flex-1">
+                  <span className="block text-[10px] text-slate-400 uppercase font-bold">Current Location</span>
+                  <span className="font-semibold truncate block">{profile.location}</span>
                 </div>
               </div>
             </div>
@@ -188,7 +242,7 @@ EDUCATION & CERTIFICATIONS
                 <span>{isResumeDownloading ? 'Generating Resume File...' : 'Download Resume (CV)'}</span>
               </button>
               <span className="block text-center text-[11px] text-slate-400 mt-2">
-                Formats: Plain Text / PDF Summary • Instant Download
+                ATS-Friendly Format • Instant Download
               </span>
             </div>
           </div>
@@ -201,15 +255,19 @@ EDUCATION & CERTIFICATIONS
             <ul className="space-y-2 text-slate-600 dark:text-slate-400 font-medium">
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                <span>Notice Period: Immediate / 15 Days</span>
+                <span>Location: Riyadh, Saudi Arabia (Available for Local & Regional Roles)</span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                <span>Work Preference: Hybrid / On-site / Remote</span>
+                <span>Notice Period: Immediate / Transferable</span>
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                <span>Target Roles: MIS Executive, Reporting Analyst, Senior BI Analyst</span>
+                <span>Work Preference: On-site / Hybrid in Riyadh & KSA</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
+                <span>Target Roles: MIS Executive, Reporting Analyst, BI Specialist, FP&A Analyst</span>
               </li>
             </ul>
           </div>
@@ -222,7 +280,7 @@ EDUCATION & CERTIFICATIONS
               Send an Interview Request or Inquiry
             </h2>
             <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-              Fill out the details below to initiate contact. You will receive an instant confirmation.
+              Fill out the details below to initiate contact directly with {profile.name}.
             </p>
 
             {isSubmitted ? (
@@ -234,7 +292,7 @@ EDUCATION & CERTIFICATIONS
                   Inquiry Dispatched Successfully!
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-emerald-800 dark:text-emerald-300 max-w-md mx-auto">
-                  Thank you, <strong>{formData.name}</strong>. Your message regarding <em>"{formData.subject || 'Role Inquiry'}"</em> has been recorded. {profile.name} will reach back out within 24 business hours at <strong>{formData.email}</strong>.
+                  Thank you, <strong>{formData.name}</strong>. Your message regarding <em>"{formData.subject || 'Role Inquiry'}"</em> has been received. {profile.name} will reach back out within 24 business hours at <strong>{formData.email}</strong>.
                 </p>
                 <button
                   onClick={() => {
@@ -265,7 +323,7 @@ EDUCATION & CERTIFICATIONS
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g. Anand Mahindra"
+                      placeholder="e.g. Talent Acquisition Partner"
                       className="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-xs text-slate-900 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-white"
                     />
                   </div>
@@ -294,7 +352,7 @@ EDUCATION & CERTIFICATIONS
                       type="text"
                       value={formData.organization}
                       onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                      placeholder="e.g. Enterprise Analytics Ltd"
+                      placeholder="e.g. Riyadh Tech Group / Aramco / STC"
                       className="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-xs text-slate-900 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-white"
                     />
                   </div>
@@ -326,7 +384,7 @@ EDUCATION & CERTIFICATIONS
                     required
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    placeholder="e.g. Interview for Senior MIS Executive position"
+                    placeholder="e.g. MIS Executive Interview Opportunity in Riyadh"
                     className="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-xs text-slate-900 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-white"
                   />
                 </div>
@@ -340,7 +398,7 @@ EDUCATION & CERTIFICATIONS
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Provide context regarding the role, location, tech stack, or questions..."
+                    placeholder="Provide context regarding the role, location in Riyadh / remote, tech stack, or meeting time..."
                     className="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-xs text-slate-900 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-white resize-none"
                   />
                 </div>

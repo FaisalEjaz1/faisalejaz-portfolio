@@ -3,6 +3,7 @@ export interface UserProfile {
   title: string;
   email: string;
   phone: string;
+  whatsapp?: string;
   linkedin: string;
   location: string;
   bio: string;

@@ -60,13 +60,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   filteredCount,
 }) => {
   return (
-    <div className="mb-6 rounded-2xl border border-slate-200/90 bg-white p-4 shadow-xs dark:border-slate-800 dark:bg-slate-900 transition-colors">
+    <div className="mb-6 rounded-xl sm:rounded-2xl border border-slate-200/90 bg-white p-3.5 sm:p-4 shadow-xs dark:border-slate-800 dark:bg-slate-900 transition-colors">
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
         {/* Controls Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5 flex-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 flex-1">
           {/* Date Range Selector */}
           <div>
-            <label className="mb-1 block text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+            <label className="mb-1 block text-[10px] sm:text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               Time Horizon
             </label>
             <div className="relative">
@@ -74,7 +74,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               <select
                 value={dateRange}
                 onChange={(e) => onDateRangeChange(e.target.value)}
-                className="w-full rounded-lg border border-slate-200 bg-slate-50 py-1.5 pl-8 pr-3 text-xs font-medium text-slate-800 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
+                className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2 pl-8 pr-3 text-xs font-medium text-slate-800 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
               >
                 {dateOptions.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -87,13 +87,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
           {/* Primary Filter */}
           <div>
-            <label className="mb-1 block text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+            <label className="mb-1 block text-[10px] sm:text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               {primaryFilterName}
             </label>
             <select
               value={primaryValue}
               onChange={(e) => onPrimaryChange(e.target.value)}
-              className="w-full rounded-lg border border-slate-200 bg-slate-50 py-1.5 px-3 text-xs font-medium text-slate-800 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
+              className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2 px-3 text-xs font-medium text-slate-800 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
             >
               <option value="ALL">
                 All {primaryFilterName.endsWith('y') ? `${primaryFilterName.slice(0, -1)}ies` : `${primaryFilterName}s`}
@@ -109,13 +109,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           {/* Secondary Filter (Optional) */}
           {secondaryFilterName && secondaryOptions && onSecondaryChange && (
             <div>
-              <label className="mb-1 block text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <label className="mb-1 block text-[10px] sm:text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 {secondaryFilterName}
               </label>
               <select
                 value={secondaryValue || 'ALL'}
                 onChange={(e) => onSecondaryChange(e.target.value)}
-                className="w-full rounded-lg border border-slate-200 bg-slate-50 py-1.5 px-3 text-xs font-medium text-slate-800 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
+                className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2 px-3 text-xs font-medium text-slate-800 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
               >
                 <option value="ALL">
                   All {secondaryFilterName.endsWith('y') ? `${secondaryFilterName.slice(0, -1)}ies` : `${secondaryFilterName}s`}
@@ -130,8 +130,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           )}
 
           {/* Table Search input */}
-          <div>
-            <label className="mb-1 block text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+          <div className={secondaryFilterName ? '' : 'sm:col-span-2 lg:col-span-2'}>
+            <label className="mb-1 block text-[10px] sm:text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               Search Table
             </label>
             <div className="relative">
@@ -141,15 +141,15 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                 value={searchTerm}
                 onChange={(e) => onSearchChange(e.target.value)}
                 placeholder={searchPlaceholder}
-                className="w-full rounded-lg border border-slate-200 bg-slate-50 py-1.5 pl-8 pr-3 text-xs text-slate-800 placeholder:text-slate-400 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
+                className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2 pl-8 pr-3 text-xs text-slate-800 placeholder:text-slate-400 focus:border-indigo-500 focus:bg-white focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
               />
             </div>
           </div>
         </div>
 
         {/* Action & Metric Stats */}
-        <div className="flex items-center justify-between lg:justify-end gap-3 pt-2 lg:pt-0 border-t lg:border-t-0 border-slate-100 dark:border-slate-800">
-          <div className="text-right">
+        <div className="flex flex-wrap items-center justify-between lg:justify-end gap-2.5 pt-2.5 lg:pt-0 border-t lg:border-t-0 border-slate-100 dark:border-slate-800">
+          <div className="text-left lg:text-right">
             <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
               Showing <span className="font-bold text-slate-900 dark:text-white">{filteredCount}</span> of {totalCount} records
             </span>
@@ -161,7 +161,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           {hasActiveFilters && (
             <button
               onClick={onResetFilters}
-              className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 transition-colors"
+              className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 transition-colors ml-auto lg:ml-0"
               title="Reset all filters"
             >
               <RotateCcw className="h-3.5 w-3.5" />
@@ -172,16 +172,18 @@ export const FilterBar: React.FC<FilterBarProps> = ({
       </div>
 
       {activeCrossFilter && (
-        <div className="mt-2.5 flex items-center gap-2 rounded-lg bg-indigo-50/80 px-3 py-1.5 text-xs text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300">
-          <Filter className="h-3.5 w-3.5 shrink-0" />
-          <span>
-            Active interactive cross-filter applied from chart: <strong>{activeCrossFilter}</strong>. All KPIs, visualizations and data rows below are synchronized.
-          </span>
+        <div className="mt-2.5 flex flex-wrap sm:flex-nowrap items-start sm:items-center justify-between gap-2 rounded-lg bg-indigo-50/80 p-2 sm:px-3 sm:py-1.5 text-xs text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300">
+          <div className="flex items-center gap-2 min-w-0">
+            <Filter className="h-3.5 w-3.5 shrink-0 text-indigo-600 dark:text-indigo-400" />
+            <span className="leading-snug text-[11px] sm:text-xs">
+              Cross-filter: <strong>{activeCrossFilter}</strong>. Charts & tables synchronized.
+            </span>
+          </div>
           <button
             onClick={onResetFilters}
-            className="ml-auto underline font-semibold hover:text-indigo-900 dark:hover:text-white"
+            className="shrink-0 underline font-bold text-[11px] sm:text-xs hover:text-indigo-900 dark:hover:text-white ml-auto"
           >
-            Clear
+            Clear Filter
           </button>
         </div>
       )}

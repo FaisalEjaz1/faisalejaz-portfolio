@@ -1,16 +1,17 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { UserProfile } from '../types';
 
-const STORAGE_KEY = 'mis_portfolio_profile_v2';
+const STORAGE_KEY = 'mis_portfolio_profile_v4';
 
 const defaultProfile: UserProfile = {
   name: 'Faisal Ejaz',
   title: 'MIS Executive | Reporting Analyst',
   email: 'faisalejaz797@gmail.com',
-  phone: '+91 98765 43210',
-  linkedin: 'linkedin.com/in/faisalejaz-analyst',
-  location: 'Bengaluru, India',
-  bio: 'Data-driven MIS Executive and Reporting Analyst specializing in automated KPI dashboards, multi-source financial reconciliation, SQL pipeline optimization, and advanced Excel / Power Query workflows.',
+  phone: '+966505869094',
+  whatsapp: '+923086728781',
+  linkedin: 'www.linkedin.com/in/faisal-ejaz-fysi0',
+  location: 'Riyadh, Saudi Arabia',
+  bio: 'Data-driven MIS Executive and Reporting Analyst based in Riyadh, specializing in automated KPI dashboards, multi-source financial reconciliation, SQL pipeline optimization, and advanced Excel / Power Query workflows.',
   github: 'github.com/faisalejaz',
   yearsExperience: 4,
 };

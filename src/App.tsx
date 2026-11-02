@@ -75,7 +75,7 @@ function AppContent() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans transition-colors">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans transition-colors overflow-x-clip">
       {/* Navigation Header */}
       <Header
         currentTab={currentTab}
@@ -84,7 +84,7 @@ function AppContent() {
       />
 
       {/* Main Page Content */}
-      <main className="flex-1 mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <main className="flex-1 mx-auto w-full max-w-7xl px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
         {currentTab === 'home' && <HomePage onNavigate={handleNavigate} />}
         {currentTab === 'executive-summary' && <ExecutiveSummaryPage onNavigate={handleNavigate} />}
         {currentTab === 'sales' && <SalesDashboard />}

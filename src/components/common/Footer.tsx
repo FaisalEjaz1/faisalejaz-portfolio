@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, Linkedin, ExternalLink, ShieldCheck, Heart } from 'lucide-react';
+import { Mail, Phone, MessageCircle, MapPin } from 'lucide-react';
 import { useProfile } from '../../context/ProfileContext';
 import { DashboardId } from '../../types';
 
@@ -9,6 +9,8 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const { profile } = useProfile();
+  const cleanPhone = profile.phone.replace(/[^0-9+]/g, '');
+  const cleanWhatsapp = (profile.whatsapp || '+923086728781').replace(/[^0-9]/g, '');
 
   return (
     <footer className="mt-16 border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 transition-colors">
@@ -16,13 +18,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           {/* Candidate identity & disclaimer */}
           <div>
-            <div className="flex items-center justify-center md:justify-start gap-2">
+            <div className="flex items-center justify-center md:justify-start gap-2 flex-wrap">
               <span className="font-bold text-slate-900 dark:text-white text-sm">
                 {profile.name}
               </span>
               <span className="text-slate-300 dark:text-slate-700">|</span>
               <span className="text-xs text-slate-500 dark:text-slate-400">
                 {profile.title}
+              </span>
+              <span className="text-slate-300 dark:text-slate-700">•</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                <MapPin className="h-3 w-3 text-rose-500 inline" />
+                {profile.location}
               </span>
             </div>
             {/* Required footer note */}
@@ -41,16 +48,29 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <span>{profile.email}</span>
             </a>
             <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
-            <span className="flex items-center gap-1.5">
+            <a
+              href={`tel:${cleanPhone}`}
+              className="flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-400"
+            >
               <Phone className="h-3.5 w-3.5" />
               <span>{profile.phone}</span>
-            </span>
+            </a>
+            <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
+            <a
+              href={`https://wa.me/${cleanWhatsapp}`}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1.5 text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 font-medium"
+            >
+              <MessageCircle className="h-3.5 w-3.5" />
+              <span>WhatsApp</span>
+            </a>
             <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
             <button
               onClick={() => onNavigate('contact')}
               className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
             >
-              View Full Profile & Resume →
+              Profile & Resume →
             </button>
           </div>
         </div>

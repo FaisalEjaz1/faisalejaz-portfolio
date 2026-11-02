@@ -23,10 +23,10 @@ test('SeededRandom produces identical repeatable sequences', () => {
   assert.deepEqual(seq1, seq2);
 });
 
-test('Formatters handle numbers, percentages, and Indian Rupees accurately', () => {
-  assert.equal(formatCurrency(125000), '₹1,25,000');
-  assert.equal(formatCurrency(1850000, true), '₹18.5 L');
-  assert.equal(formatCurrency(25000000, true), '₹2.5 Cr');
+test('Formatters handle numbers, percentages, and US Dollars accurately', () => {
+  assert.equal(formatCurrency(125000), '$125,000');
+  assert.equal(formatCurrency(1850000, true), '$1.9M');
+  assert.equal(formatCurrency(25000000, true), '$25.0M');
   assert.equal(formatNumber(1540), '1,540');
   assert.equal(formatPercent(14.24), '14.2%');
   assert.equal(formatPercent(8.5, true), '+8.5%');

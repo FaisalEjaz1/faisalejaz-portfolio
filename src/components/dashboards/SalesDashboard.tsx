@@ -48,7 +48,7 @@ const pmoCase: PmoDetails = {
   method:
     'Built an automated ingestion pipeline in Power Query to consolidate transactional ledgers across 4 zones, authored SQL window functions for MoM revenue run-rates, and built a relational Power BI star schema with dynamic quota measures.',
   outcome:
-    'Shortened month-end sales reporting cycle from 72 hours to 15 minutes, provided instant visibility into ₹10.4 Cr turnover, and enabled sales leaders to adjust quota targets in real time.',
+    'Shortened month-end sales reporting cycle from 72 hours to 15 minutes, provided instant visibility into $10.8M turnover, and enabled sales leaders to adjust quota targets in real time.',
   toolsUsed: ['Excel', 'Power Query', 'PostgreSQL', 'Power BI', 'DAX Measures'],
 };
 
@@ -345,7 +345,7 @@ export const SalesDashboard: React.FC = () => {
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-slate-800" />
               <XAxis dataKey="month" tick={{ fontSize: 10 }} stroke="#94a3b8" />
               <YAxis
-                tickFormatter={(v) => `₹${(v / 100000).toFixed(0)}L`}
+                tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
                 tick={{ fontSize: 10 }}
                 stroke="#94a3b8"
               />
@@ -382,7 +382,7 @@ export const SalesDashboard: React.FC = () => {
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-slate-800" />
               <XAxis dataKey="region" tick={{ fontSize: 11 }} stroke="#94a3b8" />
               <YAxis
-                tickFormatter={(v) => `₹${(v / 100000).toFixed(0)}L`}
+                tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
                 tick={{ fontSize: 10 }}
                 stroke="#94a3b8"
               />
@@ -449,7 +449,7 @@ export const SalesDashboard: React.FC = () => {
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-slate-800" />
               <XAxis
                 type="number"
-                tickFormatter={(v) => `₹${(v / 100000).toFixed(0)}L`}
+                tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
                 tick={{ fontSize: 10 }}
                 stroke="#94a3b8"
               />

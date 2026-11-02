@@ -334,7 +334,7 @@ export const DataCleaningPage: React.FC = () => {
                   <th className="px-3 py-2">Region</th>
                   <th className="px-3 py-2">Date (ISO)</th>
                   <th className="px-3 py-2">Category</th>
-                  <th className="px-3 py-2 text-right">Revenue (₹)</th>
+                  <th className="px-3 py-2 text-right">Revenue ($)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300 text-[11px]">

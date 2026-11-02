@@ -57,25 +57,25 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/90 transition-colors">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Brand / Logo */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <button
             onClick={() => handleNav('home')}
-            className="flex items-center gap-2.5 text-left group focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg p-1"
+            className="flex items-center gap-2 sm:gap-2.5 text-left group focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg p-1 min-w-0"
             aria-label="Go to Home"
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-600 text-white shadow-sm shadow-indigo-500/30 group-hover:bg-indigo-500 transition-colors">
-              <BarChart3 className="h-5 w-5" />
+            <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-600 text-white shadow-sm shadow-indigo-500/30 group-hover:bg-indigo-500 transition-colors">
+              <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="flex items-center gap-1.5">
-                <span className="font-bold tracking-tight text-slate-900 dark:text-white text-base">
+                <span className="font-bold tracking-tight text-slate-900 dark:text-white text-sm sm:text-base truncate">
                   {profile.name}
                 </span>
-                <span className="inline-flex items-center rounded-full bg-emerald-50 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 ring-1 ring-inset ring-emerald-600/20 dark:bg-emerald-950/60 dark:text-emerald-400">
+                <span className="hidden xs:inline-flex items-center rounded-full bg-emerald-50 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-medium text-emerald-700 ring-1 ring-inset ring-emerald-600/20 dark:bg-emerald-950/60 dark:text-emerald-400 shrink-0">
                   Verified MIS
                 </span>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1">
+              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium truncate max-w-[130px] sm:max-w-none">
                 {profile.title}
               </p>
             </div>
@@ -222,110 +222,118 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800"
+            className="lg:hidden flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800"
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer with Backdrop */}
       {isMobileMenuOpen && (
-        <div className="border-b border-slate-200 bg-white px-4 py-4 dark:border-slate-800 dark:bg-slate-900 lg:hidden">
-          <div className="flex flex-col gap-1 text-sm font-medium">
-            <button
-              onClick={() => handleNav('home')}
-              className={`flex items-center gap-2 rounded-lg px-3 py-2 text-left ${
-                currentTab === 'home'
-                  ? 'bg-indigo-50 text-indigo-700 font-semibold dark:bg-indigo-950/50 dark:text-indigo-300'
-                  : 'text-slate-700 dark:text-slate-300'
-              }`}
-            >
-              <Home className="h-4 w-4" />
-              Home / Overview
-            </button>
-            <button
-              onClick={() => handleNav('executive-summary')}
-              className={`flex items-center gap-2 rounded-lg px-3 py-2 text-left ${
-                currentTab === 'executive-summary'
-                  ? 'bg-indigo-50 text-indigo-700 font-semibold dark:bg-indigo-950/50 dark:text-indigo-300'
-                  : 'text-slate-700 dark:text-slate-300'
-              }`}
-            >
-              <Layers className="h-4 w-4" />
-              Executive Summary
-            </button>
-
-            <div className="pt-2 pb-1 text-xs font-semibold uppercase text-slate-400 dark:text-slate-500">
-              Interactive Dashboards
-            </div>
-            {dashboards.map((d) => (
+        <>
+          <div
+            className="fixed inset-0 top-16 bg-slate-900/40 backdrop-blur-xs z-30 lg:hidden"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          <div className="relative z-40 border-b border-slate-200 bg-white px-4 py-4 dark:border-slate-800 dark:bg-slate-900 lg:hidden max-h-[calc(100vh-4.5rem)] overflow-y-auto shadow-2xl">
+            <div className="flex flex-col gap-1 text-sm font-medium">
               <button
-                key={d.id}
-                onClick={() => handleNav(d.id as DashboardId)}
-                className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm ${
-                  currentTab === d.id
+                onClick={() => handleNav('home')}
+                className={`flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-left transition-colors ${
+                  currentTab === 'home'
                     ? 'bg-indigo-50 text-indigo-700 font-semibold dark:bg-indigo-950/50 dark:text-indigo-300'
-                    : 'text-slate-700 dark:text-slate-300'
+                    : 'text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800'
                 }`}
               >
-                <span>{d.icon}</span>
-                <span>{d.label}</span>
+                <Home className="h-4 w-4" />
+                Home / Overview
               </button>
-            ))}
-
-            <div className="pt-2 pb-1 text-xs font-semibold uppercase text-slate-400 dark:text-slate-500">
-              Technical Showcases
-            </div>
-            <button
-              onClick={() => handleNav('cleaning')}
-              className={`flex items-center gap-2 rounded-lg px-3 py-2 text-left ${
-                currentTab === 'cleaning'
-                  ? 'bg-indigo-50 text-indigo-700 font-semibold dark:bg-indigo-950/50 dark:text-indigo-300'
-                  : 'text-slate-700 dark:text-slate-300'
-              }`}
-            >
-              <Sparkles className="h-4 w-4 text-amber-500" />
-              Data Cleaning Engine
-            </button>
-            <button
-              onClick={() => handleNav('sql-excel')}
-              className={`flex items-center gap-2 rounded-lg px-3 py-2 text-left ${
-                currentTab === 'sql-excel'
-                  ? 'bg-indigo-50 text-indigo-700 font-semibold dark:bg-indigo-950/50 dark:text-indigo-300'
-                  : 'text-slate-700 dark:text-slate-300'
-              }`}
-            >
-              <Code2 className="h-4 w-4" />
-              SQL & Excel Showcase
-            </button>
-            <button
-              onClick={() => handleNav('contact')}
-              className={`flex items-center gap-2 rounded-lg px-3 py-2 text-left ${
-                currentTab === 'contact'
-                  ? 'bg-indigo-50 text-indigo-700 font-semibold dark:bg-indigo-950/50 dark:text-indigo-300'
-                  : 'text-slate-700 dark:text-slate-300'
-              }`}
-            >
-              <Mail className="h-4 w-4" />
-              Contact Faisal
-            </button>
-
-            <div className="mt-3 border-t border-slate-200 pt-3 dark:border-slate-800">
               <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  setIsEditModalOpen(true);
-                }}
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow"
+                onClick={() => handleNav('executive-summary')}
+                className={`flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-left transition-colors ${
+                  currentTab === 'executive-summary'
+                    ? 'bg-indigo-50 text-indigo-700 font-semibold dark:bg-indigo-950/50 dark:text-indigo-300'
+                    : 'text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800'
+                }`}
               >
-                <UserCheck className="h-4 w-4" />
-                Edit Profile Info
+                <Layers className="h-4 w-4" />
+                Executive Summary
               </button>
+
+              <div className="pt-2.5 pb-1 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Interactive Dashboards
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
+                {dashboards.map((d) => (
+                  <button
+                    key={d.id}
+                    onClick={() => handleNav(d.id as DashboardId)}
+                    className={`flex items-center gap-2.5 rounded-xl px-3 py-2 text-left text-xs transition-colors ${
+                      currentTab === d.id
+                        ? 'bg-indigo-50 text-indigo-700 font-semibold dark:bg-indigo-950/50 dark:text-indigo-300'
+                        : 'text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800'
+                    }`}
+                  >
+                    <span className="text-sm">{d.icon}</span>
+                    <span className="truncate">{d.label}</span>
+                  </button>
+                ))}
+              </div>
+
+              <div className="pt-2.5 pb-1 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Technical Showcases
+              </div>
+              <button
+                onClick={() => handleNav('cleaning')}
+                className={`flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-left transition-colors ${
+                  currentTab === 'cleaning'
+                    ? 'bg-indigo-50 text-indigo-700 font-semibold dark:bg-indigo-950/50 dark:text-indigo-300'
+                    : 'text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800'
+                }`}
+              >
+                <Sparkles className="h-4 w-4 text-amber-500" />
+                Data Cleaning Engine
+              </button>
+              <button
+                onClick={() => handleNav('sql-excel')}
+                className={`flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-left transition-colors ${
+                  currentTab === 'sql-excel'
+                    ? 'bg-indigo-50 text-indigo-700 font-semibold dark:bg-indigo-950/50 dark:text-indigo-300'
+                    : 'text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800'
+                }`}
+              >
+                <Code2 className="h-4 w-4" />
+                SQL & Excel Showcase
+              </button>
+              <button
+                onClick={() => handleNav('contact')}
+                className={`flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-left transition-colors ${
+                  currentTab === 'contact'
+                    ? 'bg-indigo-50 text-indigo-700 font-semibold dark:bg-indigo-950/50 dark:text-indigo-300'
+                    : 'text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800'
+                }`}
+              >
+                <Mail className="h-4 w-4" />
+                Contact Faisal
+              </button>
+
+              <div className="mt-3 border-t border-slate-200 pt-3 dark:border-slate-800">
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setIsEditModalOpen(true);
+                  }}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-500/20 hover:bg-indigo-500"
+                >
+                  <UserCheck className="h-4 w-4" />
+                  Edit Candidate Profile
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </header>
   );

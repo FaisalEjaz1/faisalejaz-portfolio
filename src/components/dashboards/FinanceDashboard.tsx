@@ -45,7 +45,7 @@ const pmoCase: PmoDetails = {
   method:
     'Ingested General Ledger SAP dumps into SQL, engineered an automated monthly reconciliation variance matrix using CTEs, and constructed an FP&A variance cockpit in Power BI with dynamic threshold alerts.',
   outcome:
-    'Eliminated surprise audit reconciliation gaps, established automated vendor-level PO ceilings, and reclaimed ₹48 Lakhs in redundant SaaS seats and unbudgeted campaign expenditure.',
+    'Eliminated surprise audit reconciliation gaps, established automated vendor-level PO ceilings, and reclaimed $580,000 in redundant SaaS seats and unbudgeted campaign expenditure.',
   toolsUsed: ['Excel', 'Power Query', 'SQL CTEs', 'Power BI FP&A', 'SAP ERP'],
 };
 
@@ -342,7 +342,7 @@ export const FinanceDashboard: React.FC = () => {
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-slate-800" />
               <XAxis dataKey="department" tick={{ fontSize: 10 }} stroke="#94a3b8" />
-              <YAxis tickFormatter={(v) => `₹${(v / 100000).toFixed(0)}L`} tick={{ fontSize: 10 }} stroke="#94a3b8" />
+              <YAxis tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} tick={{ fontSize: 10 }} stroke="#94a3b8" />
               <Tooltip
                 formatter={(val: any, name: any) => [formatCurrency(Number(val)), name === 'actual' ? 'Actual Spend' : 'Budget']}
                 contentStyle={{ borderRadius: '8px', fontSize: '12px' }}
@@ -363,7 +363,7 @@ export const FinanceDashboard: React.FC = () => {
             <LineChart data={monthlyTrendData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-slate-800" />
               <XAxis dataKey="month" tick={{ fontSize: 10 }} stroke="#94a3b8" />
-              <YAxis tickFormatter={(v) => `₹${(v / 100000).toFixed(0)}L`} tick={{ fontSize: 10 }} stroke="#94a3b8" />
+              <YAxis tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} tick={{ fontSize: 10 }} stroke="#94a3b8" />
               <Tooltip
                 formatter={(val: any, name: any) => [formatCurrency(Number(val)), name === 'actual' ? 'Actual' : 'Budget']}
                 contentStyle={{ borderRadius: '8px', fontSize: '12px' }}
@@ -419,9 +419,9 @@ export const FinanceDashboard: React.FC = () => {
             <BarChart data={varianceByDept} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-slate-800" />
               <XAxis dataKey="department" tick={{ fontSize: 10 }} stroke="#94a3b8" />
-              <YAxis tickFormatter={(v) => `₹${(v / 100000).toFixed(0)}L`} tick={{ fontSize: 10 }} stroke="#94a3b8" />
+              <YAxis tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} tick={{ fontSize: 10 }} stroke="#94a3b8" />
               <Tooltip formatter={(val: any) => [formatCurrency(Number(val)), 'Net Variance']} contentStyle={{ borderRadius: '8px', fontSize: '12px' }} />
-              <Bar dataKey="variance" name="Variance (₹)">
+              <Bar dataKey="variance" name="Variance ($)">
                 {varianceByDept.map((entry, index) => (
                   <Cell key={`var-${index}`} fill={entry.isOver ? '#f43f5e' : '#10b981'} />
                 ))}

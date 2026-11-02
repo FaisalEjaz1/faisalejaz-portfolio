@@ -172,26 +172,26 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
     <div className="space-y-12">
       {/* Hero Section */}
-      <section className="relative overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-8 sm:p-12 shadow-sm dark:border-slate-800 dark:bg-slate-900 transition-colors">
+      <section className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-white p-5 sm:p-8 lg:p-12 shadow-sm dark:border-slate-800 dark:bg-slate-900 transition-colors">
         <div className="relative z-10 max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50/80 px-3 py-1 text-xs font-semibold text-indigo-700 dark:border-indigo-900/60 dark:bg-indigo-950/60 dark:text-indigo-300 mb-5">
-            <ShieldCheck className="h-3.5 w-3.5" />
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-indigo-200 bg-indigo-50/80 px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold text-indigo-700 dark:border-indigo-900/60 dark:bg-indigo-950/60 dark:text-indigo-300 mb-4 sm:mb-5">
+            <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
             <span>Executive MIS & Decision-Support Analytics Portfolio</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.2] sm:leading-[1.15]">
             Turning complex transactional data into{' '}
             <span className="text-indigo-600 dark:text-indigo-400">clear executive decisions.</span>
           </h1>
 
-          <p className="mt-4 text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 font-medium">
+          <p className="mt-3 sm:mt-4 text-xs sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 font-medium">
             Hi, I’m <strong>{profile.name}</strong>, a {profile.title} with {profile.yearsExperience}+ years of experience building automated daily/weekly/monthly MIS reporting systems, financial reconciliation frameworks, and interactive Power BI & Excel models for senior leadership.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3">
             <button
               onClick={() => onNavigate('executive-summary')}
-              className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-indigo-500/25 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-indigo-500/25 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
             >
               <BarChart3 className="h-4 w-4" />
               <span>Explore Executive Rollup</span>
@@ -200,14 +200,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
             <button
               onClick={() => onNavigate('sales')}
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-xs sm:text-sm font-bold text-slate-700 shadow-xs hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-xs sm:text-sm font-bold text-slate-700 shadow-xs hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 transition-colors"
             >
               <span>View Dashboards (6)</span>
             </button>
 
             <button
               onClick={() => onNavigate('contact')}
-              className="inline-flex items-center gap-2 rounded-xl border border-transparent px-4 py-3 text-xs sm:text-sm font-semibold text-indigo-600 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:bg-indigo-950/50 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-transparent px-4 py-3 text-xs sm:text-sm font-semibold text-indigo-600 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:bg-indigo-950/50 transition-colors"
             >
               <span>Contact Candidate</span>
             </button>
